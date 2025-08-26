@@ -40,7 +40,6 @@ For instance, running script with the following input parameters:
 ```
 ./scripts/TestSFs.py --era Run3_2022 --lepton PromptMu
 ```
-will print out scale factors for prompt muons as measured in the 2022 dataset for eta = [0.2,0.8,1.4,2.0] and pt = [25,30,35,40,50,60,80] GeV.
+will print out central values of scale factors along with up/down variations for prompt muons as measured in the 2022 dataset for eta = [0.2,0.8,1.4,2.0] and pt = [25,30,35,40,50,60,80] GeV.
 
-## To-do
-Implement evaluation of up/down systematic variations.
+

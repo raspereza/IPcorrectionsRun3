@@ -32,4 +32,6 @@ if __name__ == "__main__":
         print('eta = %3.1f'%(eta))
         for pt in pt_points:
             sf = ipsigSF.getSF(pt,eta)
-            print('     pt = %4.1f GeV  ->   SF = %6.4f'%(pt,sf))
+            sf_up = ipsigSF.getSF(pt,eta,syst='up')
+            sf_down = ipsigSF.getSF(pt,eta,syst='down')
+            print('  pt = %4.1f GeV -> SF(central) = %6.4f  SF(up) = %6.4f  SF(down) = %6.4f'%(pt,sf,sf_up,sf_down))

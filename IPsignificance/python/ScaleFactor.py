@@ -41,7 +41,8 @@ class ScaleFactor:
             self.hfits[i] = self.sfFile.Get('hfit_binEta'+istr)
         
         
-    def getSF(self,pt,eta):
+    def getSF(self,pt,eta,**kwargs):
+        syst = kwargs.get('syst','central')
         absEta = abs(eta)
         Eta = ROOT.TMath.Min(absEta,self.maxEta-0.001)
         Pt = ROOT.TMath.Max(self.minPt+0.01,ROOT.TMath.Min(pt,self.maxPt-0.01))
@@ -51,9 +52,19 @@ class ScaleFactor:
         if bin_id==1:
             bin_pt = self.hfits[1].GetXaxis().FindBin(Pt)
             sf = self.hfits[1].GetBinContent(bin_pt)
+            if sys=='up':
+                sf += self.hfits[1].GetBinError(bin_pt)
+            elif syst=='down':
+                sf -= self.hfits[1].GetBinError(bin_pt)
+                if sf<0: sf = 0.01 # protection against negative values
         elif bin_id==self.nbinsExtrapEta:
             bin_pt = self.hfits[self.nbinsEta].GetXaxis().FindBin(Pt)
             sf = self.hfits[self.nbinsEta].GetBinContent(bin_pt)
+            if syst=='up':
+                sf += self.hfits[1].GetBinError(bin_pt)
+            elif syst=='down':
+                sf -= self.hfits[1].GetBinError(bin_pt)
+                if sf<0: sf = 0.01 # protection against negative values
         else:
             bin1 = bin_id-1
             bin2 = bin_id
@@ -63,6 +74,14 @@ class ScaleFactor:
             bin_pt = self.hfits[bin1].GetXaxis().FindBin(Pt)
             sf1 = self.hfits[bin1].GetBinContent(bin_pt)
             sf2 = self.hfits[bin2].GetBinContent(bin_pt)
+            if syst=='up':
+                sf1 += self.hfits[bin1].GetBinError(bin_pt)
+                sf2 += self.hfits[bin2].GetBinError(bin_pt)
+            elif syst=='down':
+                sf1 -= self.hfits[bin1].GetBinError(bin_pt)
+                sf2 -= self.hfits[bin2].GetBinError(bin_pt)
+                if sf1<0: sf1 = 0.01 # protection against negative values
+                if sf2<0: sf2 = 0.01 # protection against negative values
             dsf = sf2 - sf1
             dsf_dx = dsf/dx
             sf = sf1 + dsf_dx*(Eta-x1)
