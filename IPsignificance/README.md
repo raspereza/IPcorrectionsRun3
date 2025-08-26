@@ -23,11 +23,12 @@ corrections are derived. For example, file `SF_PromptMu_Run3_2022.root` contains
 * 1.0 < |eta| < 1.6
 * 1.6 < |eta| < 2.1 (2.4) for electrons (muons)
 
-The scale factors are stored in RooT functions (TF1 objects), corresponding to three measurement bins in eta and three options: central values, up systematic variation, and down. Function are named according to the following mnemonic `fitFunc_binEta${bin}_${opt}`, where 
-* `${bin}=1` corresponds to |eta| < 1.0
-* `${bin}=2` corresponds to 1.0 < |eta| < 1.6
-* `${bin}=3` corresponds 1.6 < |eta| < 2.1 (2.4) for electrons (muons)
-* `${opt}=[central,up,down]`
+The scale factors are stored in the form of RooT functions (TF1 objects), corresponding to three measurement bins in eta and three options: central values, up systematic variation, and down systematic variation. Functions are named according to the following mnemonic `fitFunc_binEta${bin}_${opt}`, where 
+* `${bin}=1` corresponds to |eta| < 1.0;
+* `${bin}=2` corresponds to 1.0 < |eta| < 1.6;
+* `${bin}=3` corresponds 1.6 < |eta| < 2.1 (2.4) for electrons (muons);
+and
+* `${opt}={central,up,down}`.
 
 Interface to scale factors is implemented in the script `${CMSSW_BASE}/src/IPcorrectionsRun3/IPsignificance/python/ScaleFactor.py`
 
