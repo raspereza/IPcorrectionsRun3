@@ -1,0 +1,21 @@
+# Some necessary info to create the JSON
+
+era: 2022
+
+leptonFlavor: muon
+
+etaBinEdges:
+  - 0
+  - 1.0
+  - 1.6
+  - 2.4
+
+flavMap:
+  prompt: 0
+  tauDecay: 1
+
+ROOTFiles:
+  prompt: ../data/SF_PromptMu_Run3_2022.root
+  tauDecay:  ../data/SF_TauMu_Run3_2022.root
+
+outputPath: ../JSON
