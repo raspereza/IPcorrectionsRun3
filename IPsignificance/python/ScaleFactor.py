@@ -36,12 +36,53 @@ class ScaleFactor:
         print('minEta   = %4.2f'%(self.minEta))
         print('maxEta   = %4.2f'%(self.maxEta))
         self.hfits = {}
+        self.funcs = {}
+        self.variations = {'central','up','down'}
         for i in range(1,self.nbinsEta+1):
             istr = '%1i'%(i)
-            self.hfits[i] = self.sfFile.Get('hfit_binEta'+istr)
-        
+            histname ='hfit_binEta%s'%(istr)
+            self.hfits[i] = self.sfFile.Get(histname)
+            ff = {}
+            for s in self.variations:
+                funcname = 'fitFunc_binEta%s_%s'%(istr,s)
+                ff[s] = self.sfFile.Get(funcname)
+            self.funcs[i] = ff
         
     def getSF(self,pt,eta,**kwargs):
+        syst = kwargs.get('syst','central')
+        absEta = abs(eta)
+        if syst not in self.variations:
+            syst = 'central'
+        Eta = ROOT.TMath.Min(absEta,self.maxEta-0.001)
+        Pt = ROOT.TMath.Max(self.minPt+0.01,ROOT.TMath.Min(pt,self.maxPt-0.01))
+        binEta = self.eff_data.GetYaxis().FindBin(Eta)
+        bin_id = self.EtaBinning.GetXaxis().FindBin(Eta)
+        sf = 1.0
+        
+        if bin_id==1:
+            sf = self.funcs[1][syst].Eval(Pt)
+            if sf<0: sf = 0.01 # protection against negative values
+        elif bin_id==self.nbinsExtrapEta:
+            sf = self.funcs[self.nbinsEta][syst].Eval(Pt)
+            if sf<0: sf = 0.01 # protection against negative values
+        else:
+            # interpolate SF between eta bins 
+            bin1 = bin_id-1
+            bin2 = bin_id
+            x1 = self.EtaBinning.GetXaxis().GetBinLowEdge(bin_id)
+            x2 = self.EtaBinning.GetXaxis().GetBinLowEdge(bin_id+1)
+            dx = x2 - x1
+            sf1 = self.funcs[bin1][syst].Eval(Pt)
+            sf2 = self.funcs[bin2][syst].Eval(Pt)
+            if sf1<0: sf1 = 0.01 # protection against negative values
+            if sf2<0: sf2 = 0.01 # protection against negative values
+            dsf = sf2 - sf1
+            dsf_dx = dsf/dx
+            sf = sf1 + dsf_dx*(Eta-x1)
+            
+        return sf
+        
+    def getSF_hist(self,pt,eta,**kwargs):
         syst = kwargs.get('syst','central')
         absEta = abs(eta)
         Eta = ROOT.TMath.Min(absEta,self.maxEta-0.001)
