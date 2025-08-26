@@ -52,7 +52,7 @@ class ScaleFactor:
         if bin_id==1:
             bin_pt = self.hfits[1].GetXaxis().FindBin(Pt)
             sf = self.hfits[1].GetBinContent(bin_pt)
-            if sys=='up':
+            if syst=='up':
                 sf += self.hfits[1].GetBinError(bin_pt)
             elif syst=='down':
                 sf -= self.hfits[1].GetBinError(bin_pt)
