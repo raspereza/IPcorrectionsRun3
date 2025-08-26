@@ -36,7 +36,7 @@ The scale factors can be tested with the script `${CMSSW_BASE}/src/IPcorrections
 * `--era` - era, available options: Run3_2022, Run3_2023; 
 * `--lepton` - lepton type, available options: PromptE, PromptMu, TauE, TauMu.
 
-For instance, running scripts with the following input parameters:
+For instance, running script with the following input parameters:
 ```
 ./scripts/TestSFs.py --era Run3_2022 --lepton PromptMu
 ```
