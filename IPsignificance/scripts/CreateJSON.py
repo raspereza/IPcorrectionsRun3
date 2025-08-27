@@ -93,7 +93,7 @@ def buildIPsigSchema(etaBinEdges, fileDict, flavMap):
                     'key': flavval,
                     'value': {
                         'nodetype': 'binning',
-                        'input': 'eta',
+                        'input': 'abseta',
                         'edges': etaBinEdges,
                         'flow': 'clamp',
                         'content': [
@@ -118,7 +118,7 @@ def buildCorrection(era, lepFlav, flavMap, etaBinEdges, fileDict):
     info = "IP significance correction if IP_Sig > 1.0 is applied"
     inputs = [
         {'name': "pt",       'type': "real",   'description': "Reconstructed lepton pT"},
-        {'name': "eta",      'type': "real",   'description': "Reconstructed lepton eta"},
+        {'name': "abseta",   'type': "real",   'description': "Reconstructed lepton abs(eta)"},
         {'name': "flavor",   'type': "string", 'description': "prompt or decay from tau : 0 - prompt, 1 - taudecay"},
         {'name': "syst",     'type': "string", 'description': "nom, up or down"}
     ]

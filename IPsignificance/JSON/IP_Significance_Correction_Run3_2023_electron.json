@@ -10,9 +10,9 @@
           "type": "real",
           "description": "Reconstructed lepton pT"
         },
-        { "name": "eta",
+        { "name": "abseta",
           "type": "real",
-          "description": "Reconstructed lepton eta"
+          "description": "Reconstructed lepton abs(eta)"
         },
         { "name": "flavor",
           "type": "string",
@@ -35,7 +35,7 @@
           { "key": 0,
             "value": {
               "nodetype": "binning",
-              "input": "eta",
+              "input": "abseta",
               "edges": [ 0.0, 1.0, 1.6, 2.4 ],
               "content": [
                 { "nodetype": "category",
@@ -141,7 +141,7 @@
           { "key": 1,
             "value": {
               "nodetype": "binning",
-              "input": "eta",
+              "input": "abseta",
               "edges": [ 0.0, 1.0, 1.6, 2.4 ],
               "content": [
                 { "nodetype": "category",
