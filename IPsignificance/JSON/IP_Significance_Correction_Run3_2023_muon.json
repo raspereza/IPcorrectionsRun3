@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
-  "description": "IP Sig Corr",
+  "description": "IP Significance Correction for electron and muon either as prompt or as tau decay product",
   "corrections": [
-    { "name": "ipsig_correction_2023_muon",
-      "description": "IP significance correction if IP_Sig > 1.0 is applied",
+    { "name": "ipsig_correction",
+      "description": "IP significance correction for {lepFlav}",
       "version": 1,
       "inputs": [
         { "name": "pt",
@@ -15,7 +15,7 @@
           "description": "Reconstructed lepton abs(eta)"
         },
         { "name": "flavor",
-          "type": "string",
+          "type": "int",
           "description": "prompt or decay from tau : 0 - prompt, 1 - taudecay"
         },
         { "name": "syst",

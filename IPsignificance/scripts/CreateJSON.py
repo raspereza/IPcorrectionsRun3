@@ -114,19 +114,19 @@ def buildIPsigSchema(etaBinEdges, fileDict, flavMap):
 
 
 def buildCorrection(era, lepFlav, flavMap, etaBinEdges, fileDict):
-    name = f"ipsig_correction_{era}_{lepFlav}"
-    info = "IP significance correction if IP_Sig > 1.0 is applied"
+    name = f"ipsig_correction"
+    info = r"IP significance correction for {lepFlav}"
     inputs = [
         {'name': "pt",       'type': "real",   'description': "Reconstructed lepton pT"},
         {'name': "abseta",   'type': "real",   'description': "Reconstructed lepton abs(eta)"},
-        {'name': "flavor",   'type': "string", 'description': "prompt or decay from tau : 0 - prompt, 1 - taudecay"},
+        {'name': "flavor",   'type': "int",    'description': "prompt or decay from tau : 0 - prompt, 1 - taudecay"},
         {'name': "syst",     'type': "string", 'description': "nom, up or down"}
     ]
     output = {'name': "ipsig_correction", 'type': "real", 'description': "IP-Significance Correction"}
     
     cset = schema.CorrectionSet(
         schema_version=2,
-        description="IP Sig Corr",
+        description="IP Significance Correction for electron and muon either as prompt or as tau decay product",
         corrections=[
             schema.Correction(
                 name=name,
