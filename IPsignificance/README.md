@@ -46,3 +46,36 @@ cd ${CMSSW_BASE}/src/IPcorrectionsRun3/IPsignificance
 will print out central values of scale factors along with up/down variations for prompt muons as measured in the 2022 dataset for eta = [0.2,0.8,1.4,2.0] and pt = [25,30,35,40,50,60,80] GeV.
 
 
+## ROOT to Correctionlib JSON
+
+To setup the environment, one can use `CMSSW` as mentioned above, or source a `LCG` environment just by doing
+```bash
+source setup.sh
+```
+from tha main repo.
+
+Using **`scripts/CreateJSON.py`, one can dump the SFs from `ROOT` files to `correctionlib` JSON so that it can be used in analyses easily. One of the **`scripts/Configs`** is necessary to access some basic information. All one needs is a very simple command
+```bash
+python CreateJSON.py Configs/<config.yaml>
+```
+To validate the just cooked JSONs, using the same `pt` and `eta` values used for the `TestSFs.py`, one can easily load any of the JSONs, give the inputs and it will return the SFs. A simple example is given below
+```bash
+pt_points = [25, 30, 35, 40, 50, 60, 80, 120, 149, 200]
+eta_points = [0.2, 0.4, 0.8, 1.2, 1.4, 1.9, 2.0, 2.3, 1.7, 1.5]
+
+# checked for 2022_electron
+>>> import correctionlib
+>>> cset = correctionlib.CorrectionSet.from_file("IP_Significance_Correction_Run3_2022_electron.json")
+>>> corr = cset["ipsig_correction"]
+
+# Pronpt
+>>> corr.evaluate(pt_points, eta_points, 0, "nom")
+[1.00301875, 1.00301875, 1.00290466, 1.00731891, 1.0063184 ,1.06951105, 1.07543296, 1.08299383, 1.08490455, 1.02772482]
+>>> corr.evaluate(pt_points, eta_points, 0, "up")
+[1.01082933, 1.01082933, 1.00794623, 1.01363915, 1.01134386,1.07676091, 1.08522562, 1.09338219, 1.11015018, 1.05289229]
+# tauDecay
+>>> corr.evaluate(pt_points, eta_points, 1, "nom")
+[0.97205955, 0.97205955, 0.97435849, 0.99535793, 0.99869251,1.01491711, 0.96754554, 0.73411427, 0.44924536, 0.64202417]
+>>> corr.evaluate(pt_points, eta_points, 1, "down")
+[0.9418946 , 0.9418946 , 0.95252165, 0.96970172, 0.95465019,0.94554706, 0.88493638, 0.59299283, 0.10652288, 0.38977125]
+```
