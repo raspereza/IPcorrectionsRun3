@@ -6,13 +6,13 @@ class ScaleFactor:
 
     def __init__(self,**kwargs):
         self.filename = kwargs.get('filename','None')
-        self.labelSF = kwargs.get('label','promptSF')
         if os.path.isfile(self.filename):
             print('Loading file with scale factors for IPSig cut : %s'%(self.filename))
         else:
             print('No file %s is found'%(self.filename))
             print('Quitting')
             exit()
+        self.interpolate = kwargs.get('interpolate',False)
         self.sfFile = ROOT.TFile(self.filename,'read')
         self.eff_data = self.sfFile.Get('effData')
         self.eff_mc = self.sfFile.Get('effMC')
@@ -27,8 +27,8 @@ class ScaleFactor:
         for ib in range(1,self.nbinsEta+1):
             self.binsEta.append(self.eff_data.GetYaxis().GetBinCenter(ib))
         self.binsEta.append(self.maxEta)
-        self.nbinsExtrapEta = self.nbinsEta + 1
-        self.EtaBinning = ROOT.TH1D(self.labelSF,"",self.nbinsExtrapEta,array('d',list(self.binsEta)))
+        self.nbinsInterpEta = self.nbinsEta + 1
+        self.EtaBinning = ROOT.TH1D('EtaBinsInterp',"",self.nbinsInterpEta,array('d',list(self.binsEta)))
         print('nbinsPt  = %1i'%(self.nbinsPt))
         print('nbinsEta = %1i'%(self.nbinsEta))
         print('minPt    = %2.0f'%(self.minPt))
@@ -58,28 +58,30 @@ class ScaleFactor:
         binEta = self.eff_data.GetYaxis().FindBin(Eta)
         bin_id = self.EtaBinning.GetXaxis().FindBin(Eta)
         sf = 1.0
-        
-        if bin_id==1:
-            sf = self.funcs[1][syst].Eval(Pt)
-            if sf<0: sf = 0.01 # protection against negative values
-        elif bin_id==self.nbinsExtrapEta:
-            sf = self.funcs[self.nbinsEta][syst].Eval(Pt)
-            if sf<0: sf = 0.01 # protection against negative values
+
+        if self.interpolate:
+            if bin_id==1:
+                sf = self.funcs[1][syst].Eval(Pt)
+                if sf<0: sf = 0.01 # protection against negative values
+            elif bin_id==self.nbinsInterpEta:
+                sf = self.funcs[self.nbinsEta][syst].Eval(Pt)
+                if sf<0: sf = 0.01 # protection against negative values
+            else:
+                # interpolate SF between eta bins 
+                bin1 = bin_id-1
+                bin2 = bin_id
+                x1 = self.EtaBinning.GetXaxis().GetBinLowEdge(bin_id)
+                x2 = self.EtaBinning.GetXaxis().GetBinLowEdge(bin_id+1)
+                dx = x2 - x1
+                sf1 = self.funcs[bin1][syst].Eval(Pt)
+                sf2 = self.funcs[bin2][syst].Eval(Pt)
+                if sf1<0: sf1 = 0.01 # protection against negative values
+                if sf2<0: sf2 = 0.01 # protection against negative values
+                dsf = sf2 - sf1
+                dsf_dx = dsf/dx
+                sf = sf1 + dsf_dx*(Eta-x1)
         else:
-            # interpolate SF between eta bins 
-            bin1 = bin_id-1
-            bin2 = bin_id
-            x1 = self.EtaBinning.GetXaxis().GetBinLowEdge(bin_id)
-            x2 = self.EtaBinning.GetXaxis().GetBinLowEdge(bin_id+1)
-            dx = x2 - x1
-            sf1 = self.funcs[bin1][syst].Eval(Pt)
-            sf2 = self.funcs[bin2][syst].Eval(Pt)
-            if sf1<0: sf1 = 0.01 # protection against negative values
-            if sf2<0: sf2 = 0.01 # protection against negative values
-            dsf = sf2 - sf1
-            dsf_dx = dsf/dx
-            sf = sf1 + dsf_dx*(Eta-x1)
-            
+            sf = self.funcs[binEta][syst].Eval(Pt)
         return sf
         
     def getSF_hist(self,pt,eta,**kwargs):
@@ -98,7 +100,7 @@ class ScaleFactor:
             elif syst=='down':
                 sf -= self.hfits[1].GetBinError(bin_pt)
                 if sf<0: sf = 0.01 # protection against negative values
-        elif bin_id==self.nbinsExtrapEta:
+        elif bin_id==self.nbinsInterpEta:
             bin_pt = self.hfits[self.nbinsEta].GetXaxis().FindBin(Pt)
             sf = self.hfits[self.nbinsEta].GetBinContent(bin_pt)
             if syst=='up':
@@ -126,7 +128,6 @@ class ScaleFactor:
             dsf = sf2 - sf1
             dsf_dx = dsf/dx
             sf = sf1 + dsf_dx*(Eta-x1)
-            
         return sf
         
     def getEffData(self,pt,eta):

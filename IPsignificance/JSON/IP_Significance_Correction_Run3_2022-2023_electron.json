@@ -10,17 +10,17 @@
           "type": "real",
           "description": "Reconstructed lepton pT"
         },
-        { "name": "abseta",
+        { "name": "eta",
           "type": "real",
-          "description": "Reconstructed lepton abs(eta)"
+          "description": "Reconstructed lepton eta"
         },
         { "name": "flavor",
           "type": "int",
-          "description": "prompt or decay from tau : 0 - prompt, 1 - taudecay"
+          "description": "prompt or decay from tau : 0 - prompt, 1 - tauDecay"
         },
         { "name": "syst",
           "type": "string",
-          "description": "nom, up or down"
+          "description": "nom, (prompt,tauDecay)__(up,down)"
         }
       ],
       "output": {
@@ -35,8 +35,8 @@
           { "key": 0,
             "value": {
               "nodetype": "binning",
-              "input": "abseta",
-              "edges": [ 0.0, 1.0, 1.6, 2.1 ],
+              "input": "eta",
+              "edges": [ -2.1, -1.6, -1.0, 0.0, 1.0, 1.6, 2.1 ],
               "content": [
                 { "nodetype": "category",
                   "input": "syst",
@@ -44,92 +44,728 @@
                     { "key": "nom",
                       "value": {
                         "nodetype": "formula",
-                        "expression": "[0] + [1]*min(max(x, 30.0), 150.0) + [2]*pow(min(max(x, 30.0), 150.0),2)",
-                        "parser": "TFormula",
-                        "variables": [ "pt" ],
-                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
-                      }
-                    },
-                    { "key": "up",
-                      "value": {
-                        "nodetype": "formula",
-                        "expression": "[0] + [1]*min(max(x, 30.0), 150.0) + [2]*pow(min(max(x, 30.0), 150.0),2) + sqrt( [3] + [4]*min(max(x, 30.0), 150.0) + [5]*pow(min(max(x, 30.0), 150.0),2) + [6]*pow(min(max(x, 30.0), 150.0),3) + [7]*pow(min(max(x, 30.0), 150.0),4) )",
-                        "parser": "TFormula",
-                        "variables": [ "pt" ],
-                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07, 0.0009101813071192174, -5.575839544991094e-05, 1.1984473275602912e-06, -1.057266314879656e-08, 3.345668250294672e-11 ]
-                      }
-                    },
-                    { "key": "down",
-                      "value": {
-                        "nodetype": "formula",
-                        "expression": "[0] + [1]*min(max(x, 30.0), 150.0) + [2]*pow(min(max(x, 30.0), 150.0),2) - sqrt( [3] + [4]*min(max(x, 30.0), 150.0) + [5]*pow(min(max(x, 30.0), 150.0),2) + [6]*pow(min(max(x, 30.0), 150.0),3) + [7]*pow(min(max(x, 30.0), 150.0),4) )",
-                        "parser": "TFormula",
-                        "variables": [ "pt" ],
-                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07, 0.0009101813071192174, -5.575839544991094e-05, 1.1984473275602912e-06, -1.057266314879656e-08, 3.345668250294672e-11 ]
-                      }
-                    }
-                  ]
-                },
-                { "nodetype": "category",
-                  "input": "syst",
-                  "content": [
-                    { "key": "nom",
-                      "value": {
-                        "nodetype": "formula",
-                        "expression": "[0] + [1]*min(max(x, 30.0), 150.0) + [2]*pow(min(max(x, 30.0), 150.0),2)",
-                        "parser": "TFormula",
-                        "variables": [ "pt" ],
-                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
-                      }
-                    },
-                    { "key": "up",
-                      "value": {
-                        "nodetype": "formula",
-                        "expression": "[0] + [1]*min(max(x, 30.0), 150.0) + [2]*pow(min(max(x, 30.0), 150.0),2) + sqrt( [3] + [4]*min(max(x, 30.0), 150.0) + [5]*pow(min(max(x, 30.0), 150.0),2) + [6]*pow(min(max(x, 30.0), 150.0),3) + [7]*pow(min(max(x, 30.0), 150.0),4) )",
-                        "parser": "TFormula",
-                        "variables": [ "pt" ],
-                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06, 0.001333720646195363, -7.43434733848439e-05, 1.5031066665762108e-06, -1.2701000886235276e-08, 3.858417680867284e-11 ]
-                      }
-                    },
-                    { "key": "down",
-                      "value": {
-                        "nodetype": "formula",
-                        "expression": "[0] + [1]*min(max(x, 30.0), 150.0) + [2]*pow(min(max(x, 30.0), 150.0),2) - sqrt( [3] + [4]*min(max(x, 30.0), 150.0) + [5]*pow(min(max(x, 30.0), 150.0),2) + [6]*pow(min(max(x, 30.0), 150.0),3) + [7]*pow(min(max(x, 30.0), 150.0),4) )",
-                        "parser": "TFormula",
-                        "variables": [ "pt" ],
-                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06, 0.001333720646195363, -7.43434733848439e-05, 1.5031066665762108e-06, -1.2701000886235276e-08, 3.858417680867284e-11 ]
-                      }
-                    }
-                  ]
-                },
-                { "nodetype": "category",
-                  "input": "syst",
-                  "content": [
-                    { "key": "nom",
-                      "value": {
-                        "nodetype": "formula",
-                        "expression": "[0] + [1]*min(max(x, 30.0), 150.0) + [2]*pow(min(max(x, 30.0), 150.0),2)",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
                         "parser": "TFormula",
                         "variables": [ "pt" ],
                         "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
                       }
                     },
-                    { "key": "up",
+                    { "key": "prompt_etaLt1p0_stat_up",
                       "value": {
                         "nodetype": "formula",
-                        "expression": "[0] + [1]*min(max(x, 30.0), 150.0) + [2]*pow(min(max(x, 30.0), 150.0),2) + sqrt( [3] + [4]*min(max(x, 30.0), 150.0) + [5]*pow(min(max(x, 30.0), 150.0),2) + [6]*pow(min(max(x, 30.0), 150.0),3) + [7]*pow(min(max(x, 30.0), 150.0),4) )",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
+                      }
+                    },
+                    { "key": "prompt_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2) + sqrt( [3] + [4]*min(max(x, 30.0), 100.0) + [5]*pow(min(max(x, 30.0), 100.0),2) + [6]*pow(min(max(x, 30.0), 100.0),3) + [7]*pow(min(max(x, 30.0), 100.0),4) )",
                         "parser": "TFormula",
                         "variables": [ "pt" ],
                         "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06, 0.0014638666497213972, -8.20714952302562e-05, 1.679319190854483e-06, -1.4305503765109043e-08, 4.359018714787149e-11 ]
                       }
                     },
-                    { "key": "down",
+                    { "key": "prompt_etaGt1p6_stat_down",
                       "value": {
                         "nodetype": "formula",
-                        "expression": "[0] + [1]*min(max(x, 30.0), 150.0) + [2]*pow(min(max(x, 30.0), 150.0),2) - sqrt( [3] + [4]*min(max(x, 30.0), 150.0) + [5]*pow(min(max(x, 30.0), 150.0),2) + [6]*pow(min(max(x, 30.0), 150.0),3) + [7]*pow(min(max(x, 30.0), 150.0),4) )",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2) - sqrt( [3] + [4]*min(max(x, 30.0), 100.0) + [5]*pow(min(max(x, 30.0), 100.0),2) + [6]*pow(min(max(x, 30.0), 100.0),3) + [7]*pow(min(max(x, 30.0), 100.0),4) )",
                         "parser": "TFormula",
                         "variables": [ "pt" ],
                         "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06, 0.0014638666497213972, -8.20714952302562e-05, 1.679319190854483e-06, -1.4305503765109043e-08, 4.359018714787149e-11 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
+                      }
+                    }
+                  ]
+                },
+                { "nodetype": "category",
+                  "input": "syst",
+                  "content": [
+                    { "key": "nom",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    },
+                    { "key": "prompt_etaLt1p0_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    },
+                    { "key": "prompt_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2) + sqrt( [3] + [4]*min(max(x, 30.0), 100.0) + [5]*pow(min(max(x, 30.0), 100.0),2) + [6]*pow(min(max(x, 30.0), 100.0),3) + [7]*pow(min(max(x, 30.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06, 0.001333720646195363, -7.43434733848439e-05, 1.5031066665762108e-06, -1.2701000886235276e-08, 3.858417680867284e-11 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2) - sqrt( [3] + [4]*min(max(x, 30.0), 100.0) + [5]*pow(min(max(x, 30.0), 100.0),2) + [6]*pow(min(max(x, 30.0), 100.0),3) + [7]*pow(min(max(x, 30.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06, 0.001333720646195363, -7.43434733848439e-05, 1.5031066665762108e-06, -1.2701000886235276e-08, 3.858417680867284e-11 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    }
+                  ]
+                },
+                { "nodetype": "category",
+                  "input": "syst",
+                  "content": [
+                    { "key": "nom",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    },
+                    { "key": "prompt_etaLt1p0_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2) + sqrt( [3] + [4]*min(max(x, 30.0), 100.0) + [5]*pow(min(max(x, 30.0), 100.0),2) + [6]*pow(min(max(x, 30.0), 100.0),3) + [7]*pow(min(max(x, 30.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07, 0.0009101813071192174, -5.575839544991094e-05, 1.1984473275602912e-06, -1.057266314879656e-08, 3.345668250294672e-11 ]
+                      }
+                    },
+                    { "key": "prompt_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2) - sqrt( [3] + [4]*min(max(x, 30.0), 100.0) + [5]*pow(min(max(x, 30.0), 100.0),2) + [6]*pow(min(max(x, 30.0), 100.0),3) + [7]*pow(min(max(x, 30.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07, 0.0009101813071192174, -5.575839544991094e-05, 1.1984473275602912e-06, -1.057266314879656e-08, 3.345668250294672e-11 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    }
+                  ]
+                },
+                { "nodetype": "category",
+                  "input": "syst",
+                  "content": [
+                    { "key": "nom",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    },
+                    { "key": "prompt_etaLt1p0_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2) + sqrt( [3] + [4]*min(max(x, 30.0), 100.0) + [5]*pow(min(max(x, 30.0), 100.0),2) + [6]*pow(min(max(x, 30.0), 100.0),3) + [7]*pow(min(max(x, 30.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07, 0.0009101813071192174, -5.575839544991094e-05, 1.1984473275602912e-06, -1.057266314879656e-08, 3.345668250294672e-11 ]
+                      }
+                    },
+                    { "key": "prompt_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2) - sqrt( [3] + [4]*min(max(x, 30.0), 100.0) + [5]*pow(min(max(x, 30.0), 100.0),2) + [6]*pow(min(max(x, 30.0), 100.0),3) + [7]*pow(min(max(x, 30.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07, 0.0009101813071192174, -5.575839544991094e-05, 1.1984473275602912e-06, -1.057266314879656e-08, 3.345668250294672e-11 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.9952536656350232, 3.7422546621514256e-06, -1.2391792102553824e-07 ]
+                      }
+                    }
+                  ]
+                },
+                { "nodetype": "category",
+                  "input": "syst",
+                  "content": [
+                    { "key": "nom",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    },
+                    { "key": "prompt_etaLt1p0_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    },
+                    { "key": "prompt_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2) + sqrt( [3] + [4]*min(max(x, 30.0), 100.0) + [5]*pow(min(max(x, 30.0), 100.0),2) + [6]*pow(min(max(x, 30.0), 100.0),3) + [7]*pow(min(max(x, 30.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06, 0.001333720646195363, -7.43434733848439e-05, 1.5031066665762108e-06, -1.2701000886235276e-08, 3.858417680867284e-11 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2) - sqrt( [3] + [4]*min(max(x, 30.0), 100.0) + [5]*pow(min(max(x, 30.0), 100.0),2) + [6]*pow(min(max(x, 30.0), 100.0),3) + [7]*pow(min(max(x, 30.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06, 0.001333720646195363, -7.43434733848439e-05, 1.5031066665762108e-06, -1.2701000886235276e-08, 3.858417680867284e-11 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.961732369307142, 0.0011963569435924537, -7.378946357642972e-06 ]
+                      }
+                    }
+                  ]
+                },
+                { "nodetype": "category",
+                  "input": "syst",
+                  "content": [
+                    { "key": "nom",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
+                      }
+                    },
+                    { "key": "prompt_etaLt1p0_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
+                      }
+                    },
+                    { "key": "prompt_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2) + sqrt( [3] + [4]*min(max(x, 30.0), 100.0) + [5]*pow(min(max(x, 30.0), 100.0),2) + [6]*pow(min(max(x, 30.0), 100.0),3) + [7]*pow(min(max(x, 30.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06, 0.0014638666497213972, -8.20714952302562e-05, 1.679319190854483e-06, -1.4305503765109043e-08, 4.359018714787149e-11 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2) - sqrt( [3] + [4]*min(max(x, 30.0), 100.0) + [5]*pow(min(max(x, 30.0), 100.0),2) + [6]*pow(min(max(x, 30.0), 100.0),3) + [7]*pow(min(max(x, 30.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06, 0.0014638666497213972, -8.20714952302562e-05, 1.679319190854483e-06, -1.4305503765109043e-08, 4.359018714787149e-11 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 30.0), 100.0) + [2]*pow(min(max(x, 30.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0178342218971543, 0.0009508527772528549, -3.9601016762624575e-06 ]
                       }
                     }
                   ]
@@ -141,8 +777,8 @@
           { "key": 1,
             "value": {
               "nodetype": "binning",
-              "input": "abseta",
-              "edges": [ 0.0, 1.0, 1.6, 2.1 ],
+              "input": "eta",
+              "edges": [ -2.1, -1.6, -1.0, 0.0, 1.0, 1.6, 2.1 ],
               "content": [
                 { "nodetype": "category",
                   "input": "syst",
@@ -150,28 +786,118 @@
                     { "key": "nom",
                       "value": {
                         "nodetype": "formula",
-                        "expression": "[0] + [1]*min(max(x, 31.0), 99.99999999999999) + [2]*pow(min(max(x, 31.0), 99.99999999999999),2)",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
                         "parser": "TFormula",
                         "variables": [ "pt" ],
-                        "parameters": [ 1.0404134911978358, -0.0032889195937923516, 3.730680349096577e-05 ]
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
                       }
                     },
-                    { "key": "up",
+                    { "key": "prompt_etaLt1p0_stat_up",
                       "value": {
                         "nodetype": "formula",
-                        "expression": "[0] + [1]*min(max(x, 31.0), 99.99999999999999) + [2]*pow(min(max(x, 31.0), 99.99999999999999),2) + sqrt( [3] + [4]*min(max(x, 31.0), 99.99999999999999) + [5]*pow(min(max(x, 31.0), 99.99999999999999),2) + [6]*pow(min(max(x, 31.0), 99.99999999999999),3) + [7]*pow(min(max(x, 31.0), 99.99999999999999),4) )",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
                         "parser": "TFormula",
                         "variables": [ "pt" ],
-                        "parameters": [ 1.0404134911978358, -0.0032889195937923516, 3.730680349096577e-05, 0.04982895523777224, -0.003864481538562041, 0.00010773801538808659, -1.2597002159585862e-06, 5.282645350727991e-09 ]
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
                       }
                     },
-                    { "key": "down",
+                    { "key": "prompt_etaLt1p0_stat_down",
                       "value": {
                         "nodetype": "formula",
-                        "expression": "[0] + [1]*min(max(x, 31.0), 99.99999999999999) + [2]*pow(min(max(x, 31.0), 99.99999999999999),2) - sqrt( [3] + [4]*min(max(x, 31.0), 99.99999999999999) + [5]*pow(min(max(x, 31.0), 99.99999999999999),2) + [6]*pow(min(max(x, 31.0), 99.99999999999999),3) + [7]*pow(min(max(x, 31.0), 99.99999999999999),4) )",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
                         "parser": "TFormula",
                         "variables": [ "pt" ],
-                        "parameters": [ 1.0404134911978358, -0.0032889195937923516, 3.730680349096577e-05, 0.04982895523777224, -0.003864481538562041, 0.00010773801538808659, -1.2597002159585862e-06, 5.282645350727991e-09 ]
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2) + sqrt( [3] + [4]*min(max(x, 31.0), 100.0) + [5]*pow(min(max(x, 31.0), 100.0),2) + [6]*pow(min(max(x, 31.0), 100.0),3) + [7]*pow(min(max(x, 31.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05, 0.07455161876076145, -0.005561906893493977, 0.00014800183627178097, -1.6298047087031815e-06, 6.407833813216891e-09 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2) - sqrt( [3] + [4]*min(max(x, 31.0), 100.0) + [5]*pow(min(max(x, 31.0), 100.0),2) + [6]*pow(min(max(x, 31.0), 100.0),3) + [7]*pow(min(max(x, 31.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05, 0.07455161876076145, -0.005561906893493977, 0.00014800183627178097, -1.6298047087031815e-06, 6.407833813216891e-09 ]
                       }
                     }
                   ]
@@ -182,28 +908,118 @@
                     { "key": "nom",
                       "value": {
                         "nodetype": "formula",
-                        "expression": "[0] + [1]*min(max(x, 31.0), 99.99999999999999) + [2]*pow(min(max(x, 31.0), 99.99999999999999),2)",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
                         "parser": "TFormula",
                         "variables": [ "pt" ],
-                        "parameters": [ 0.7301047223282817, 0.01102294558549031, -0.00010467855484325095 ]
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
                       }
                     },
-                    { "key": "up",
+                    { "key": "prompt_etaLt1p0_stat_up",
                       "value": {
                         "nodetype": "formula",
-                        "expression": "[0] + [1]*min(max(x, 31.0), 99.99999999999999) + [2]*pow(min(max(x, 31.0), 99.99999999999999),2) + sqrt( [3] + [4]*min(max(x, 31.0), 99.99999999999999) + [5]*pow(min(max(x, 31.0), 99.99999999999999),2) + [6]*pow(min(max(x, 31.0), 99.99999999999999),3) + [7]*pow(min(max(x, 31.0), 99.99999999999999),4) )",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
                         "parser": "TFormula",
                         "variables": [ "pt" ],
-                        "parameters": [ 0.7301047223282817, 0.01102294558549031, -0.00010467855484325095, 0.06548924119170661, -0.005075835730103057, 0.00014112419031079448, -1.6426970658744148e-06, 6.851685714462547e-09 ]
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
                       }
                     },
-                    { "key": "down",
+                    { "key": "prompt_etaLt1p0_stat_down",
                       "value": {
                         "nodetype": "formula",
-                        "expression": "[0] + [1]*min(max(x, 31.0), 99.99999999999999) + [2]*pow(min(max(x, 31.0), 99.99999999999999),2) - sqrt( [3] + [4]*min(max(x, 31.0), 99.99999999999999) + [5]*pow(min(max(x, 31.0), 99.99999999999999),2) + [6]*pow(min(max(x, 31.0), 99.99999999999999),3) + [7]*pow(min(max(x, 31.0), 99.99999999999999),4) )",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
                         "parser": "TFormula",
                         "variables": [ "pt" ],
-                        "parameters": [ 0.7301047223282817, 0.01102294558549031, -0.00010467855484325095, 0.06548924119170661, -0.005075835730103057, 0.00014112419031079448, -1.6426970658744148e-06, 6.851685714462547e-09 ]
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2) + sqrt( [3] + [4]*min(max(x, 31.0), 100.0) + [5]*pow(min(max(x, 31.0), 100.0),2) + [6]*pow(min(max(x, 31.0), 100.0),3) + [7]*pow(min(max(x, 31.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05, 0.045422951425788734, -0.003366964175664784, 8.870506508044616e-05, -9.615164013585606e-07, 3.695686353352691e-09 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2) - sqrt( [3] + [4]*min(max(x, 31.0), 100.0) + [5]*pow(min(max(x, 31.0), 100.0),2) + [6]*pow(min(max(x, 31.0), 100.0),3) + [7]*pow(min(max(x, 31.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05, 0.045422951425788734, -0.003366964175664784, 8.870506508044616e-05, -9.615164013585606e-07, 3.695686353352691e-09 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
                       }
                     }
                   ]
@@ -214,28 +1030,484 @@
                     { "key": "nom",
                       "value": {
                         "nodetype": "formula",
-                        "expression": "[0] + [1]*min(max(x, 31.0), 99.99999999999999) + [2]*pow(min(max(x, 31.0), 99.99999999999999),2)",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
                         "parser": "TFormula",
                         "variables": [ "pt" ],
-                        "parameters": [ 0.8085163521817782, 0.009517517529072365, -0.00010801580409045245 ]
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
                       }
                     },
-                    { "key": "up",
+                    { "key": "prompt_etaLt1p0_stat_up",
                       "value": {
                         "nodetype": "formula",
-                        "expression": "[0] + [1]*min(max(x, 31.0), 99.99999999999999) + [2]*pow(min(max(x, 31.0), 99.99999999999999),2) + sqrt( [3] + [4]*min(max(x, 31.0), 99.99999999999999) + [5]*pow(min(max(x, 31.0), 99.99999999999999),2) + [6]*pow(min(max(x, 31.0), 99.99999999999999),3) + [7]*pow(min(max(x, 31.0), 99.99999999999999),4) )",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
                         "parser": "TFormula",
                         "variables": [ "pt" ],
-                        "parameters": [ 0.8085163521817782, 0.009517517529072365, -0.00010801580409045245, 0.11233217990672993, -0.00878451370460213, 0.0002471185250967216, -2.923969586071142e-06, 1.2458295382303506e-08 ]
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
                       }
                     },
-                    { "key": "down",
+                    { "key": "prompt_etaLt1p0_stat_down",
                       "value": {
                         "nodetype": "formula",
-                        "expression": "[0] + [1]*min(max(x, 31.0), 99.99999999999999) + [2]*pow(min(max(x, 31.0), 99.99999999999999),2) - sqrt( [3] + [4]*min(max(x, 31.0), 99.99999999999999) + [5]*pow(min(max(x, 31.0), 99.99999999999999),2) + [6]*pow(min(max(x, 31.0), 99.99999999999999),3) + [7]*pow(min(max(x, 31.0), 99.99999999999999),4) )",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
                         "parser": "TFormula",
                         "variables": [ "pt" ],
-                        "parameters": [ 0.8085163521817782, 0.009517517529072365, -0.00010801580409045245, 0.11233217990672993, -0.00878451370460213, 0.0002471185250967216, -2.923969586071142e-06, 1.2458295382303506e-08 ]
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2) + sqrt( [3] + [4]*min(max(x, 31.0), 100.0) + [5]*pow(min(max(x, 31.0), 100.0),2) + [6]*pow(min(max(x, 31.0), 100.0),3) + [7]*pow(min(max(x, 31.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05, 0.03305450459056972, -0.0024430310779242808, 6.440679257309498e-05, -7.007023446731774e-07, 2.7089025046348977e-09 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2) - sqrt( [3] + [4]*min(max(x, 31.0), 100.0) + [5]*pow(min(max(x, 31.0), 100.0),2) + [6]*pow(min(max(x, 31.0), 100.0),3) + [7]*pow(min(max(x, 31.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05, 0.03305450459056972, -0.0024430310779242808, 6.440679257309498e-05, -7.007023446731774e-07, 2.7089025046348977e-09 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
+                      }
+                    }
+                  ]
+                },
+                { "nodetype": "category",
+                  "input": "syst",
+                  "content": [
+                    { "key": "nom",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
+                      }
+                    },
+                    { "key": "prompt_etaLt1p0_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
+                      }
+                    },
+                    { "key": "prompt_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2) + sqrt( [3] + [4]*min(max(x, 31.0), 100.0) + [5]*pow(min(max(x, 31.0), 100.0),2) + [6]*pow(min(max(x, 31.0), 100.0),3) + [7]*pow(min(max(x, 31.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05, 0.03305450459056972, -0.0024430310779242808, 6.440679257309498e-05, -7.007023446731774e-07, 2.7089025046348977e-09 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2) - sqrt( [3] + [4]*min(max(x, 31.0), 100.0) + [5]*pow(min(max(x, 31.0), 100.0),2) + [6]*pow(min(max(x, 31.0), 100.0),3) + [7]*pow(min(max(x, 31.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05, 0.03305450459056972, -0.0024430310779242808, 6.440679257309498e-05, -7.007023446731774e-07, 2.7089025046348977e-09 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 1.0094913712536444, -0.0018913887703779588, 2.270910033576755e-05 ]
+                      }
+                    }
+                  ]
+                },
+                { "nodetype": "category",
+                  "input": "syst",
+                  "content": [
+                    { "key": "nom",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
+                      }
+                    },
+                    { "key": "prompt_etaLt1p0_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
+                      }
+                    },
+                    { "key": "prompt_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2) + sqrt( [3] + [4]*min(max(x, 31.0), 100.0) + [5]*pow(min(max(x, 31.0), 100.0),2) + [6]*pow(min(max(x, 31.0), 100.0),3) + [7]*pow(min(max(x, 31.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05, 0.045422951425788734, -0.003366964175664784, 8.870506508044616e-05, -9.615164013585606e-07, 3.695686353352691e-09 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2) - sqrt( [3] + [4]*min(max(x, 31.0), 100.0) + [5]*pow(min(max(x, 31.0), 100.0),2) + [6]*pow(min(max(x, 31.0), 100.0),3) + [7]*pow(min(max(x, 31.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05, 0.045422951425788734, -0.003366964175664784, 8.870506508044616e-05, -9.615164013585606e-07, 3.695686353352691e-09 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8070530839212875, 0.00757229706347582, -6.897458528525876e-05 ]
+                      }
+                    }
+                  ]
+                },
+                { "nodetype": "category",
+                  "input": "syst",
+                  "content": [
+                    { "key": "nom",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
+                      }
+                    },
+                    { "key": "prompt_etaLt1p0_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
+                      }
+                    },
+                    { "key": "prompt_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaLt1p0_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
+                      }
+                    },
+                    { "key": "prompt_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_eta1p0to1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
+                      }
+                    },
+                    { "key": "prompt_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2)",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2) + sqrt( [3] + [4]*min(max(x, 31.0), 100.0) + [5]*pow(min(max(x, 31.0), 100.0),2) + [6]*pow(min(max(x, 31.0), 100.0),3) + [7]*pow(min(max(x, 31.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05, 0.07455161876076145, -0.005561906893493977, 0.00014800183627178097, -1.6298047087031815e-06, 6.407833813216891e-09 ]
+                      }
+                    },
+                    { "key": "tauDecay_etaGt1p6_stat_down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 31.0), 100.0) + [2]*pow(min(max(x, 31.0), 100.0),2) - sqrt( [3] + [4]*min(max(x, 31.0), 100.0) + [5]*pow(min(max(x, 31.0), 100.0),2) + [6]*pow(min(max(x, 31.0), 100.0),3) + [7]*pow(min(max(x, 31.0), 100.0),4) )",
+                        "parser": "TFormula",
+                        "variables": [ "pt" ],
+                        "parameters": [ 0.8926658543972994, 0.005689306589708883, -6.753616122962654e-05, 0.07455161876076145, -0.005561906893493977, 0.00014800183627178097, -1.6298047087031815e-06, 6.407833813216891e-09 ]
                       }
                     }
                   ]
