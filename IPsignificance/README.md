@@ -52,7 +52,7 @@ The output json files are already stored in the folder [`${CMSSW_BASE}/src/IPcor
 
 ## Testing scale factors
 
-The scale factors can be tested with the script (`${CMSSW_BASE}/src/IPcorrectionsRun3/IPsignificance/scripts/TestSFs.py`)[https://github.com/raspereza/IPcorrectionsRun3/blob/main/IPsignificance/scripts/TestSFs.py] which takes as an input two parameter
+The scale factors can be tested with the script [`${CMSSW_BASE}/src/IPcorrectionsRun3/IPsignificance/scripts/TestSFs.py`](https://github.com/raspereza/IPcorrectionsRun3/blob/main/IPsignificance/scripts/TestSFs.py) which takes as an input two parameter
 * `--lepton` - lepton type, available options: PromptE, PromptMu, TauE, TauMu.
 * `--pt` - transverse momentum of lepton.
 
