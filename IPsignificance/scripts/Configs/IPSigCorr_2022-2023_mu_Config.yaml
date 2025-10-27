@@ -5,7 +5,10 @@ era: 2022-2023
 leptonFlavor: muon
 
 etaBinEdges:
-  - 0
+  - -2.4
+  - -1.6
+  - -1.0
+  - 0.0
   - 1.0
   - 1.6
   - 2.4
@@ -15,7 +18,6 @@ flavMap:
   tauDecay: 1
 
 ROOTFiles:
-  prompt: ../data/SF_PromptMu_Run3_2022-2023.root
-  tauDecay:  ../data/SF_TauMu_Run3_2022-2023.root
+  prompt: SF_PromptMu_Run3_2022-2023.root
+  tauDecay: SF_TauMu_Run3_2022-2023.root
 
-outputPath: ../JSON
