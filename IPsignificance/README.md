@@ -29,7 +29,7 @@ The scale factors are stored in the form of RooT functions (TF1 objects), corres
 and
 * `${opt}={central,up,down}`.
 
-Custom interface to scale factors is implemented in the script (`${CMSSW_BASE}/src/IPcorrectionsRun3/IPsignificance/python/ScaleFactor.py`)[https://github.com/raspereza/IPcorrectionsRun3/blob/main/IPsignificance/python/ScaleFactor.py].
+Custom interface to scale factors is implemented in the script [`${CMSSW_BASE}/src/IPcorrectionsRun3/IPsignificance/python/ScaleFactor.py`](https://github.com/raspereza/IPcorrectionsRun3/blob/main/IPsignificance/python/ScaleFactor.py).
 
 ## ROOT to Correctionlib JSON
 
