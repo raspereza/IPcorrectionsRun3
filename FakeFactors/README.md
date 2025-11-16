@@ -27,7 +27,7 @@ The fake factors are derived as a continuous functions of tau candidate pT and b
 
 * number of jets (Njets): Njets=0, Njets=1,`Njets>=2;
 * tau candidate pseudorapidity (eta): barrel (|eta|<1.48), endcap (1.48<|eta|<2.5);
-* tau decay mode: pi (DM=0), rho (DM=1), a1_1pr (DM=2), a1_3pr (DM10).
+* tau decay mode (DM): pi (DM=0), rho (DM=1), a1_1pr (DM=2), a1_3pr (DM=10).
 
 The tau decay mode is aligned with the definition used in the CP H->tautau analysis. Six types of fake factors are provided.
 
@@ -125,7 +125,7 @@ The evaluator of correction set takes the following arguments:
 * `FF` - type of FF as defined above (string)
 * `sys` - 'nom', 'up' and 'down': central value and up/down variations (string) 
 
-Evaluator returns column of fake factors or their up/down variations depending on specified parameter `sys`. The output produced by the code should like like this:
+Evaluator returns column of fake factors or their up/down variations depending on specified parameter `sys`. The output produced by the code should look like this:
 
 ```
 [0.04811876 0.02036017 0.02413395 0.02477415] [0.0551879  0.02302126 0.02801975 0.03066327] [0.04104962 0.01769908 0.02024815 0.01888503]
