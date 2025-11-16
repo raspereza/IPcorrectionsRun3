@@ -2,7 +2,7 @@
 
 ## Installation
 
-Login to lxplus machine. It is assumed that you have already installed `CMSSW_14_1_0_pre4` or higher versions of the `CMSSW` package. Execute the following commands if you have not yet cloned repository[https://github.com/raspereza/IPcorrectionsRun3](https://github.com/raspereza/IPcorrectionsRun3) 
+Login to lxplus machine. It is assumed that you have already installed `CMSSW_14_1_0_pre4` or higher versions of the `CMSSW` package. Execute the following commands if you have not yet cloned repository [https://github.com/raspereza/IPcorrectionsRun3](https://github.com/raspereza/IPcorrectionsRun3) 
 
 ```
 cd ${CMSSW_BASE}/src
@@ -23,9 +23,9 @@ git pull
 
 The fake factors are derived as a continuous functions of tau candidate pT and binned in the following additional variables:
 
-* `number of jets (Njets)`: `Njets=0` `Njets=1`,`Njets>=2`;
-* `tau candidate pseudorapidity (eta)`: `barrel` (|eta|<1.48), `endcap` (1.48<|eta|<2.5);
-* `tau decay mode`: `pi` (DM=0), `rho` (DM=1), `a1_1pr` (DM=2), `a1_3pr` (DM10).
+* number of jets (Njets): Njets=0, Njets=1,`Njets>=2;
+* tau candidate pseudorapidity (eta): barrel (|eta|<1.48), endcap (1.48<|eta|<2.5);
+* tau decay mode: pi (DM=0), rho (DM=1), a1_1pr (DM=2), a1_3pr (DM10).
 
 The tau decay mode is aligned with the definition used in the CP H->tautau analysis. Six types of fake factors are provided.
 
