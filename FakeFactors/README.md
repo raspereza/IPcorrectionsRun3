@@ -17,6 +17,8 @@ If this package is already present in your project area, pull the recent updates
 ```
 cd IPcorrectionsRun3
 git pull
+cd IPcorrectionsRun3/FakeFactors
+scramv1 b 
 ```
 
 ## RooT-based interface to fake factors
@@ -33,8 +35,8 @@ The tau decay mode is aligned with the definition used in the CP H->tautau analy
 * `wj` : fake factors for W+Jets process. Derived in data sideband: opposite-sign leptons, mT > 70 GeV, special BDT > 0.2 and n_bjets==0.
 * `mc_wj` : fake factors for W+Jets procces derived from MC in the same sideband region as `wj`. Used for validation tests.
 * `mc_top` : fake factors for top-pair events derived from MC in the signal region.
-* `ss_antiiso` : fake factors to study extrapolation uncertainties from same-sign to opposit-sign region in the QCD fake factors. Derived in the same-sign region with antiisolated muon: 1.5<iso(mu)<0.5
-* `os_antiiso` : fake factors to study extrapolation uncertainties from same-sign to opposit-sign region in the QCD fake factors. Derived in the oppostie-sign region with antiisolated muon: 1.5<iso(mu)<0.5
+* `ss_antiiso` : fake factors to study extrapolation uncertainties from same-sign to opposite-sign region in the QCD fake factors. Derived in the same-sign region with antiisolated muon: 1.5<iso(mu)<0.5
+* `os_antiiso` : fake factors to study extrapolation uncertainties from same-sign to opposite-sign region in the QCD fake factors. Derived in the opposite-sign region with antiisolated muon: 1.5<iso(mu)<0.5
 
 The dependence of fake factors on the tau candidate pT is stored in the form of TF1 objects in the ROOT files located in the folder [`IPcorrectionsRun3/FakeFactors/data`](https://github.com/raspereza/IPcorrectionsRun3/tree/main/FakeFactors/data).
 
@@ -78,14 +80,14 @@ source setup.sh
 ```
 from the main repo.
 
-Using [`${CMSSW_BASE}/src/IPcorrectionsRun3/FakeFactors/scripts/CreateJSON.py`](https://github.com/raspereza/IPcorrectionsRun3/blob/main/Factors/scripts/CreateJSON.py), one converts from `ROOT` files to `correctionlib` JSON so that it can be used in the analyses based on columnwise approach. The script
+Using [IPcorrectionsRun3/FakeFactors/scripts/CreateJSON.py`](https://github.com/raspereza/IPcorrectionsRun3/blob/main/Factors/scripts/CreateJSON.py), one converts from `ROOT` files to `correctionlib` JSON so that it can be used in the analyses based on columnwise approach. The script
 is run with one argument: the name of the RooT file without extension. An example of executing script is given below
 
 ```
 ./CreateJSON.py --filename FF_Run3_mt_v2
 ```
 
-The output json files are already stored in the folder [`${CMSSW_BASE}/src/IPcorrectionsRun3/FakeFactors/JSON`](https://github.com/raspereza/IPcorrectionsRun3/tree/main/FakeFactors/JSON)
+The output json files are already stored in the folder [`IPcorrectionsRun3/FakeFactors/JSON`](https://github.com/raspereza/IPcorrectionsRun3/tree/main/FakeFactors/JSON)
 
 ## Correctionlib interface
 
@@ -120,7 +122,7 @@ The evaluator of correction set takes the following arguments:
 * `eta` - column of tau candidate eta (double)
 * `njets` - column of number of jets (int or double)
 * `dm` - column of decay mode (int): available options - 0 (pi), 1 (rho), 2 (a1_1pr), 10 (a1_3pr).
-* `FF - type of FF as defined above (string)
+* `FF` - type of FF as defined above (string)
 * `sys` - 'nom', 'up' and 'down': central value and up/down variations (string) 
 
 Evaluator returns column of fake factors or their up/down variations depending on specified parameter `sys`. The output produced by the code should like like this:
