@@ -36,7 +36,7 @@ The tau decay mode is aligned with the definition used in the CP H->tautau analy
 * `mc_wj` : fake factors for W+Jets procces derived from MC in the same sideband region as `wj`. Used for validation tests.
 * `mc_top` : fake factors for top-pair events derived from MC in the signal region.
 
-The dependence of fake factors on the tau candidate pT is stored in the form of TF1 objects in the ROOT files located in the folder [`IPcorrectionsRun3/FakeFactors/data/Nov18`](https://github.com/raspereza/IPcorrectionsRun3/tree/main/FakeFactors/data/Nov18). Four sets of fake factors are provided:
+The dependence of fake factors on the tau candidate pT is stored in the form of TF1 objects in the ROOT files located in the folder [IPcorrectionsRun3/FakeFactors/data/Nov18](https://github.com/raspereza/IPcorrectionsRun3/tree/main/FakeFactors/data/Nov18). Four sets of fake factors are provided:
 
 * `FF_Run3_mt_ipcut.root` : mu+tau channel, fake factors are measured with IP significance cut applied on muon.
 * `FF_Run3_et_ipcut.root` : e+tau channel, fake factors are measured with IP significance cut applied on electron.
@@ -52,18 +52,19 @@ source setup.sh
 ```
 from the main repo.
 
-Using [IPcorrectionsRun3/FakeFactors/scripts/CreateJSON.py`](https://github.com/raspereza/IPcorrectionsRun3/blob/main/Factors/scripts/CreateJSON.py), one converts from `ROOT` files to `correctionlib` JSON so that it can be used in the analyses based on columnwise approach. The script
+Using [IPcorrectionsRun3/FakeFactors/scripts/CreateJSON.py](https://github.com/raspereza/IPcorrectionsRun3/blob/main/Factors/scripts/CreateJSON.py), one converts from ROOT files to correctionlib JSON so that fake factors can be used in the analyses based on columnwise approach. The script
 is run with two argument:
 * --filename the name of the RooT file without extension;
 * --with_eta : optional flag to introduce dependence of fake factors on eta.
 
-Given limited statistics in determination regions, we recommend to use fake factors, where eta dependence is omitted. We also advice to apply fake factors measured with the IP significance cut applied to leptons, as this cut is used in the nominal CP H->tautau analysis. 
-
+An example of running:
 ```
 ./CreateJSON.py --filename Nov18/FF_Run3_mt_noipcut
 ```
 
-The up-to-date output json files are already stored in the folder [`IPcorrectionsRun3/FakeFactors/JSON/Nov18`](https://github.com/raspereza/IPcorrectionsRun3/tree/main/FakeFactors/JSON/Nov18)
+Given limited statistics in determination regions, we recommend to use fake factors, where eta dependence is omitted. We also advice to use fake factors measured with the IP significance cut applied to leptons, as this cut is used in the nominal CP H->tautau analysis. 
+
+The up-to-date output json files are already stored in the folder [IPcorrectionsRun3/FakeFactors/JSON/Nov18](https://github.com/raspereza/IPcorrectionsRun3/tree/main/FakeFactors/JSON/Nov18)
 They encode fake factors, where dependence on eta is omitted. 
 
 ## Correctionlib interface
