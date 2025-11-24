@@ -1,3 +1,4 @@
+
 # Jet->tau fake factors for CP H->tautau analysis with early Run3 data
 
 ## Installation
@@ -108,19 +109,5 @@ Evaluator returns column of fake factors or their up/down variations depending o
 ```
  
 For further details/information on the json-based access to fake factors please inspect script 
-[IPcorrectionsRun3/FakeFactors/scripts/TestFakeFactors.py`](https://github.com/raspereza/IPcorrectionsRun3/blob/main/FakeFactors/scripts/TestFakeFactors.py).
+[IPcorrectionsRun3/FakeFactors/scripts/TestFakeFactors.py](https://github.com/raspereza/IPcorrectionsRun3/blob/main/FakeFactors/scripts/TestFakeFactors.py).
 
-## ATTENTION! Updated fake factors (18 November)
-
-Updated set of fake factors in the json format is found in folder [IPcorrections/FakeFactors/JSON/Nov18](https://github.com/raspereza/IPcorrectionsRun3/tree/main/FakeFactors/JSON/Nov18). Fake factors are derived for both intended to be used in the final analysis of early Run 3 data (2022+2023).  derived for both channels. For each channel two sets of fake factors are provided:
-
-* fake factors derived with cut on lepton IP lepton significance applied;
-* fake factors derived without applying cut on lepton IP significance.
-
-Fake factors determined with cut on leptons IP significance are recommended for use, as this cut is used in the nominal analysis.  
-
-The following modifications are implemented in the new set of fake factors:
-1. Dependence on eta is omitted.
-2. For QCD fake factors, determination region is defined by tighter cut on the lepton isolation: 0.05<iso<0.2 (previously the cut 0.05<iso<0.3 was applied. The tighter cut on isolation makes determination region closer to the signal region and allows to perform closure test of  
-
-For details
