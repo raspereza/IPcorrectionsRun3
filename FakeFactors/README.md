@@ -1,5 +1,5 @@
 
-# Jet->tau fake factors for CP H->tautau analysis with early Run3 data
+# Jet->tau fake factors for CP H->tautau analysis with early Run3 data (mu+tau and e+tau channels)
 
 ## Installation
 
