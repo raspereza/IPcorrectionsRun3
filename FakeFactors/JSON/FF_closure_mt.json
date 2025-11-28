@@ -1,0 +1,357 @@
+{
+  "schema_version": 2,
+  "description": "FF closure",
+  "corrections": [
+    { "name": "FF_closure",
+      "description": "FF closure corrections for CP H->tautau analysis",
+      "version": 1,
+      "inputs": [
+        { "name": "bdt",
+          "type": "real",
+          "description": "BDT score"
+        },
+        { "name": "bdt_class",
+          "type": "real",
+          "description": "BDT class : 0-ditau, 1-signal, 2-fakes"
+        },
+        { "name": "FFtype",
+          "type": "string",
+          "description": "fake factor type"
+        },
+        { "name": "sys",
+          "type": "string",
+          "description": "central value or syst."
+        }
+      ],
+      "output": {
+        "name": "ff_corr",
+        "type": "real",
+        "description": "Fake factor correction"
+      },
+      "data": {
+        "nodetype": "category",
+        "input": "FFtype",
+        "content": [
+          { "key": "qcd",
+            "value": {
+              "nodetype": "binning",
+              "input": "bdt_class",
+              "edges": [ -0.5, 0.5, 1.5, 2.5 ],
+              "content": [
+                { "nodetype": "category",
+                  "input": "sys",
+                  "content": [
+                    { "key": "nom",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0]",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 1.0 ]
+                      }
+                    },
+                    { "key": "up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0]",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 1.0730671478863831 ]
+                      }
+                    },
+                    { "key": "down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "2.0 - ([0])",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 1.0730671478863831 ]
+                      }
+                    }
+                  ]
+                },
+                { "nodetype": "category",
+                  "input": "sys",
+                  "content": [
+                    { "key": "nom",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0]",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 1.0 ]
+                      }
+                    },
+                    { "key": "up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 0.3), 1.0) + [2]*min(max(x, 0.3), 1.0)*min(max(x, 0.3), 1.0)",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 3.9431549745510956, -9.226097472338783, 7.14895791117816 ]
+                      }
+                    },
+                    { "key": "down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "2.0 - ([0] + [1]*min(max(x, 0.3), 1.0) + [2]*min(max(x, 0.3), 1.0)*min(max(x, 0.3), 1.0))",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 3.9431549745510956, -9.226097472338783, 7.14895791117816 ]
+                      }
+                    }
+                  ]
+                },
+                { "nodetype": "category",
+                  "input": "sys",
+                  "content": [
+                    { "key": "nom",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0]",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 1.0 ]
+                      }
+                    },
+                    { "key": "up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 0.3), 1.0)",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 0.9604164033484839, -0.03164527702517837 ]
+                      }
+                    },
+                    { "key": "down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "2.0 - ([0] + [1]*min(max(x, 0.3), 1.0))",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 0.9604164033484839, -0.03164527702517837 ]
+                      }
+                    }
+                  ]
+                }
+              ],
+              "flow": "clamp"
+            }
+          },
+          { "key": "wj",
+            "value": {
+              "nodetype": "binning",
+              "input": "bdt_class",
+              "edges": [ -0.5, 0.5, 1.5, 2.5 ],
+              "content": [
+                { "nodetype": "category",
+                  "input": "sys",
+                  "content": [
+                    { "key": "nom",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 0.3), 1.0)",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 0.7723022775204959, 0.26326169663527016 ]
+                      }
+                    },
+                    { "key": "up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "2.0*([0] + [1]*min(max(x, 0.3), 1.0)) - 1.0",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 0.7723022775204959, 0.26326169663527016 ]
+                      }
+                    },
+                    { "key": "down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0]",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 1.0 ]
+                      }
+                    }
+                  ]
+                },
+                { "nodetype": "category",
+                  "input": "sys",
+                  "content": [
+                    { "key": "nom",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 0.3), 1.0)",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 1.0319800356348598, -0.10779152506660428 ]
+                      }
+                    },
+                    { "key": "up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "2.0*([0] + [1]*min(max(x, 0.3), 1.0)) - 1.0",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 1.0319800356348598, -0.10779152506660428 ]
+                      }
+                    },
+                    { "key": "down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0]",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 1.0 ]
+                      }
+                    }
+                  ]
+                },
+                { "nodetype": "category",
+                  "input": "sys",
+                  "content": [
+                    { "key": "nom",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 0.3), 1.0) + [2]*min(max(x, 0.3), 1.0)*min(max(x, 0.3), 1.0) + [3]*min(max(x, 0.3), 1.0)*min(max(x, 0.3), 1.0)*min(max(x, 0.3), 1.0)",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ -1.0386670979996044, 9.543799879950415, -14.548941765396052, 7.135923834606698 ]
+                      }
+                    },
+                    { "key": "up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "2.0*([0] + [1]*min(max(x, 0.3), 1.0) + [2]*min(max(x, 0.3), 1.0)*min(max(x, 0.3), 1.0) + [3]*min(max(x, 0.3), 1.0)*min(max(x, 0.3), 1.0)*min(max(x, 0.3), 1.0)) - 1.0",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ -1.0386670979996044, 9.543799879950415, -14.548941765396052, 7.135923834606698 ]
+                      }
+                    },
+                    { "key": "down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0]",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 1.0 ]
+                      }
+                    }
+                  ]
+                }
+              ],
+              "flow": "clamp"
+            }
+          },
+          { "key": "mc_top",
+            "value": {
+              "nodetype": "binning",
+              "input": "bdt_class",
+              "edges": [ -0.5, 0.5, 1.5, 2.5 ],
+              "content": [
+                { "nodetype": "category",
+                  "input": "sys",
+                  "content": [
+                    { "key": "nom",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0]",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 1.0225159101032752 ]
+                      }
+                    },
+                    { "key": "up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "2.0*([0]) - 1.0",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 1.0225159101032752 ]
+                      }
+                    },
+                    { "key": "down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0]",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 1.0 ]
+                      }
+                    }
+                  ]
+                },
+                { "nodetype": "category",
+                  "input": "sys",
+                  "content": [
+                    { "key": "nom",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 0.3), 1.0) + [2]*min(max(x, 0.3), 1.0)*min(max(x, 0.3), 1.0)",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 2.5504094401521296, -5.380510642759164, 4.525932765851747 ]
+                      }
+                    },
+                    { "key": "up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "2.0*([0] + [1]*min(max(x, 0.3), 1.0) + [2]*min(max(x, 0.3), 1.0)*min(max(x, 0.3), 1.0)) - 1.0",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 2.5504094401521296, -5.380510642759164, 4.525932765851747 ]
+                      }
+                    },
+                    { "key": "down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0]",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 1.0 ]
+                      }
+                    }
+                  ]
+                },
+                { "nodetype": "category",
+                  "input": "sys",
+                  "content": [
+                    { "key": "nom",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0] + [1]*min(max(x, 0.3), 1.0) + [2]*min(max(x, 0.3), 1.0)*min(max(x, 0.3), 1.0) + [3]*min(max(x, 0.3), 1.0)*min(max(x, 0.3), 1.0)*min(max(x, 0.3), 1.0)",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ -0.7329656964734992, 8.21403494513801, -13.519232771903056, 7.188610774456838 ]
+                      }
+                    },
+                    { "key": "up",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "2.0*([0] + [1]*min(max(x, 0.3), 1.0) + [2]*min(max(x, 0.3), 1.0)*min(max(x, 0.3), 1.0) + [3]*min(max(x, 0.3), 1.0)*min(max(x, 0.3), 1.0)*min(max(x, 0.3), 1.0)) - 1.0",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ -0.7329656964734992, 8.21403494513801, -13.519232771903056, 7.188610774456838 ]
+                      }
+                    },
+                    { "key": "down",
+                      "value": {
+                        "nodetype": "formula",
+                        "expression": "[0]",
+                        "parser": "TFormula",
+                        "variables": [ "bdt" ],
+                        "parameters": [ 1.0 ]
+                      }
+                    }
+                  ]
+                }
+              ],
+              "flow": "clamp"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
