@@ -111,3 +111,56 @@ Evaluator returns column of fake factors or their up/down variations depending o
 For further details/information on the json-based access to fake factors please inspect script 
 [IPcorrectionsRun3/FakeFactors/scripts/TestFakeFactors.py](https://github.com/raspereza/IPcorrectionsRun3/blob/main/FakeFactors/scripts/TestFakeFactors.py).
 
+## Closure corrections to the jet->tau fake background
+
+JSON files with corrections and systematic uncertainties for the jet->tau fake background are availanle in the folder [IPcorrectionsRun3/FakeFactors/JSON](https://github.com/raspereza/IPcorrectionsRun3/blob/main/FakeFactors/JSON). Corrections are provided for two channels:
+* FF_closure_mt.root - mu+tau
+* FF_closure_et.root - e+tau
+
+Corrections are derived for each jet->take background component: `QCD`, `W+Jets` and `Top`.
+These corrections should be used as additional multiplicative factors for respective uncorrected fake factors (FF). Also statistical variations in FF should be multiplied by these corrections. The systematic variations are obtained by multiplying uncorrected FF by up/down systematic variation of corrections. The scheme of applying corrections and uncertainties is explained below.
+
+* FF corrected (type) = FF uncorrected (type) x Correction (type)
+* FF corrected stat. up/down (type) = FF uncorrected stat. up/down (type) x Correction (type)
+* FF corrected sys. up/down = FF uncorrected (type) x Correction sys. up/down (type)
+
+Corrections and related systematic uncertainties are derived as a function of the BDT class (ditau, signal, fakes) and respective BDT score in dedicated validation regions. The ratio of BDT distributions between reference sample (nummerator) and tested sample (denominator) is taken as correction. BDT model trained by the Imperial College group has been used for determination of corrections. 
+
+The validation region along with definition of numerator and denominator samples depend on the investigated component of the jet->tau fake background. Details on how corrections are derived are listed below: 
+
+* QCD FF
+  * Comment : For QCD fake factors only systematic variations are applied. The determination region has lepton isolation (0.05<iso(mu)<0.2) closer to the nominal selection compared to validation region (0.2<iso(e/mu)<0.3). It is therefore logical to not apply any correction. Corrections for QCD FF are set to 1 in json files.
+  * Validation region : same-sign leptons, 0.2<iso(lep)<0.3;
+  * Numerator histogram : actual data selected in validation region;
+  * Denominator : FF-based model;
+* W+Jets FF
+  * Comment : corrections are derived using simulated sample of W+Jets events. 
+  * Validation region : final signal region.
+  * Numerator : actual simulated W+Jets events selected in the final signal region.
+  * Denominator : FF-based model constructed using simulated W+Jets events;  
+* Top FF
+  * Comment : Top FF are derived solely from simulated top-pair production. Hence to assess uncertainty in the Top FF, data-driven model for W+Jets process is compared with simulation-based model for W+Jets.
+  * Validation region : determination region for W+Jets FF.
+  * Numerator : data-driven FF model for W+Jets process.
+  * Denominator : simulation-driven FF model for W+Jets process.
+
+Initializtion of correction is performed as follows:
+```
+import os
+import correctionlib
+
+jsonfilename='%s/JSON/FF_closure_%s.json'%(base_folder,args.channel)
+cset = correctionlib.CorrectionSet.from_file(jsonfilename)
+corr = cset['FF_closure']
+
+Evaluator is called with four input parameters:
+```
+corr.evaluate(bdt_score,bdt_class,FF,sys)
+```
+where
+* bdt_score (column of float) - BDT score, corresponding to the BDT class that given event assigned to;
+* bdt_class (column of int/float) - BDT class that given event is assigned to: 0 - `ditau`, 1 - `signal`, 2 - `fakes`;
+* FF (string) - type of fake factors : `qcd`, `wj`, `mc_top`; 
+* sys (string) : `nom` - central value, `up` - upward systematic variation, `down` - downward systematic variation.
+
+For further details, please refer to the test script [IPcorrectionsRun3/FakeFactors/scripts/TestClosure.py](https://github.com/raspereza/IPcorrectionsRun3/blob/main/FakeFactors/scripts/TestClosure.py).
