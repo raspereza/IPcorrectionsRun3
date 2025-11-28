@@ -117,12 +117,14 @@ JSON files with corrections and systematic uncertainties for the jet->tau fake b
 * `FF_closure_mt.json` - mu+tau
 * `FF_closure_et.json` - e+tau
 
-Corrections are derived for each jet->take background component: `QCD`, `W+Jets` and `Top`.
-These corrections should be used as additional multiplicative factors to respective uncorrected fake factors (FF). Also statistical variations in FF should be multiplied by these corrections. The systematic variations are obtained by multiplying uncorrected FF by up/down systematic variation of corrections. The scheme of applying corrections and uncertainties is explained below.
+Corrections are derived individually for each jet->tau fake background component: `QCD`, `W+Jets` and `Top`.
+These corrections should be used as additional multiplicative factors to respective uncorrected fake factors (see previous chapter of this document). Also statistical variations in fake factors (FF) should be multiplied by these corrections. The systematic variations are obtained by multiplying uncorrected FF by up/down systematic variation of corrections. The scheme of applying corrections and uncertainties is explained below.
 
-* `FF corrected (QCD/WJ/Top) = FF uncorrected (QCD,WJ,Top) x Correction (QCD/WJ/Top)`
-* `FF corrected stat. up/down (QCD/WJ/Top) = FF uncorrected stat. up/down (QCD,WJ,Top) x Correction (QCD,WJ,Top)`
-* `FF corrected sys. up/down = FF uncorrected (QCD,WJ,Top) x Correction sys. up/down (QCD,WJ,Top)`
+* `FF corrected = FF uncorrected x Correction`
+* `FF corrected stat. up/down = FF uncorrected stat. up/down (QCD,WJ,Top) x Correction (QCD,WJ,Top)`
+* `FF corrected sys. up/down = FF uncorrected x Correction sys. up/down (QCD,WJ,Top)`
+
+This procedure should be applied individually for each type of the jet->tau fake factors: `QCD`, `W+Jets` and `Top`.
 
 Corrections and related systematic uncertainties are derived as a function of the BDT class (ditau, signal, fakes) and respective BDT score in dedicated validation regions. The ratio of BDT distributions between reference sample (nummerator) and tested sample (denominator) is taken as correction. BDT model trained by the Imperial College group has been used for determination of corrections. 
 
