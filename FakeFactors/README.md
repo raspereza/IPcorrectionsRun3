@@ -114,15 +114,15 @@ For further details/information on the json-based access to fake factors please 
 ## Closure corrections to the jet->tau fake background
 
 JSON files with corrections and systematic uncertainties for the jet->tau fake background are availanle in the folder [IPcorrectionsRun3/FakeFactors/JSON](https://github.com/raspereza/IPcorrectionsRun3/blob/main/FakeFactors/JSON). Corrections are provided for two channels:
-* FF_closure_mt.root - mu+tau
-* FF_closure_et.root - e+tau
+* `FF_closure_mt.json` - mu+tau
+* `FF_closure_et.json` - e+tau
 
 Corrections are derived for each jet->take background component: `QCD`, `W+Jets` and `Top`.
-These corrections should be used as additional multiplicative factors for respective uncorrected fake factors (FF). Also statistical variations in FF should be multiplied by these corrections. The systematic variations are obtained by multiplying uncorrected FF by up/down systematic variation of corrections. The scheme of applying corrections and uncertainties is explained below.
+These corrections should be used as additional multiplicative factors to respective uncorrected fake factors (FF). Also statistical variations in FF should be multiplied by these corrections. The systematic variations are obtained by multiplying uncorrected FF by up/down systematic variation of corrections. The scheme of applying corrections and uncertainties is explained below.
 
-* FF corrected (type) = FF uncorrected (type) x Correction (type)
-* FF corrected stat. up/down (type) = FF uncorrected stat. up/down (type) x Correction (type)
-* FF corrected sys. up/down = FF uncorrected (type) x Correction sys. up/down (type)
+* `FF corrected (QCD/WJ/Top) = FF uncorrected (QCD,WJ,Top) x Correction (QCD/WJ/Top)`
+* `FF corrected stat. up/down (QCD/WJ/Top) = FF uncorrected stat. up/down (QCD,WJ,Top) x Correction (QCD,WJ,Top)`
+* `FF corrected sys. up/down = FF uncorrected (QCD,WJ,Top) x Correction sys. up/down (QCD,WJ,Top)`
 
 Corrections and related systematic uncertainties are derived as a function of the BDT class (ditau, signal, fakes) and respective BDT score in dedicated validation regions. The ratio of BDT distributions between reference sample (nummerator) and tested sample (denominator) is taken as correction. BDT model trained by the Imperial College group has been used for determination of corrections. 
 
@@ -152,8 +152,9 @@ import correctionlib
 jsonfilename='%s/JSON/FF_closure_%s.json'%(base_folder,args.channel)
 cset = correctionlib.CorrectionSet.from_file(jsonfilename)
 corr = cset['FF_closure']
+```
 
-Evaluator is called with four input parameters:
+Evaluator is called with four input arguments:
 ```
 corr.evaluate(bdt_score,bdt_class,FF,sys)
 ```
